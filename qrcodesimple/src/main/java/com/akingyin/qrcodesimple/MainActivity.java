@@ -1,14 +1,19 @@
 package com.akingyin.qrcodesimple;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.akingyin.qrcodelib.QRCode;
 
 /**
@@ -19,26 +24,33 @@ import com.akingyin.qrcodelib.QRCode;
  * @ Date 2016/8/13 17:37
  * @ Version V1.0
  */
-public class MainActivity  extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-  ImageView  iv_orc;
-  Button   btn_orc;
-  EditText  edit_name;
 
+  @BindView(R.id.iv_orc) ImageView ivOrc;
+  @BindView(R.id.edit_name) EditText editName;
+  @BindView(R.id.btn_orc) Button btnOrc;
+  @BindView(R.id.btn_scan) Button btnScan;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main_activity);
-    iv_orc = (ImageView)findViewById(R.id.iv_orc);
-    btn_orc = (Button)findViewById(R.id.btn_orc);
-    edit_name = (EditText)findViewById(R.id.edit_name);
-    btn_orc.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        String   demo = edit_name.getText().toString().trim();
-        Bitmap  bitmap = QRCode.from(TextUtils.isEmpty(demo)?"name":demo)
-            .withSize(300,300).bitmap();
-        iv_orc.setImageBitmap(bitmap);
-      }
-    });
+    ButterKnife.bind(this);
+
+
+  }
+
+  @OnClick(R.id.btn_orc)
+  public  void  btn_orc(){
+    String demo = editName.getText().toString().trim();
+    Bitmap bitmap =
+        QRCode.from(TextUtils.isEmpty(demo) ? "name" : demo).withSize(300, 300).bitmap();
+    ivOrc.setImageBitmap(bitmap);
+  }
+
+  @OnClick(R.id.btn_scan)
+  public  void  btn_scan(){
+    Intent   intent = new Intent(this,ScanActivity.class);
+    startActivity(intent);
   }
 }

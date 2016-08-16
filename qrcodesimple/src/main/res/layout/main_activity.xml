@@ -17,4 +17,9 @@
           android:text="测试"
           android:id="@+id/btn_orc"/>
 
+  <Button android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="扫描"
+      android:id="@+id/btn_scan"/>
+
 </LinearLayout>

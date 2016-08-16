@@ -1,1 +1,1 @@
-include ':QRcodelib', ':qrcodesimple'
+include ':QRcodelib', ':qrcodesimple', ':QRcScanlib'
